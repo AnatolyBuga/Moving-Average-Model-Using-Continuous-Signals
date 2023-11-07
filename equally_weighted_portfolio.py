@@ -49,7 +49,7 @@ class EquallyWeightedPortfolio:
     
     def run(self, data: pl.DataFrame, store_results=True, assets: "list[str]|None" = None,
             capital: float = 100000, target_vol: float = 0.2, multiplier: float = 1) -> pl.DataFrame:
-        """_summary_
+        """Appends all the calculations to the Data. 
 
         Args:
             data (pl.DataFrame): Time Series of the ticker. Must have 'index' column.
