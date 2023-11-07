@@ -48,8 +48,20 @@ class EquallyWeightedPortfolio:
         return ewma_params
     
     def run(self, data: pl.DataFrame, store_results=True, assets: "list[str]|None" = None,
-            capital: float = 100000, target_vol: float = 0.2, multiplier: float = 1):
+            capital: float = 100000, target_vol: float = 0.2, multiplier: float = 1) -> pl.DataFrame:
+        """_summary_
 
+        Args:
+            data (pl.DataFrame): Time Series of the ticker. Must have 'index' column.
+            store_results (bool, optional): Directs the model object to store the result. Defaults to True.
+            assets (list[str]|None, optional): Names to run model for. Defaults to None, which run all names.
+            capital (float, optional): Capital to allocate. Defaults to 100000.
+            target_vol (float, optional): Target Volatility. Defaults to 0.2.
+            multiplier (float, optional): Multiplier. Defaults to 1.
+
+        Returns:
+            pl.DataFrame: Dataframe with all the added calculations
+        """
         assets = tuple(filter(lambda col_name: col_name != 'index', data.columns )) if not assets else assets
 
         data = data.select([pl.col('index')] + [pl.col(name).cast(pl.Float64) for name in assets])
@@ -108,7 +120,7 @@ class EquallyWeightedPortfolio:
         return res
 
     def compute_percentages(self) -> dict:
-        """Can only be executed after run'
+        """Can only be executed after run
             NOTE: Uses different YEARFRAC convention - Act/360
         """
 
