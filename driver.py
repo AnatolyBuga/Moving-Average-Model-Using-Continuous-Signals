@@ -20,6 +20,9 @@ model = EquallyWeightedPortfolio(st_vol, lt_vol, first_ewma=4, n_ewma=4)
 # See function definition for all the possible params
 res = model.run(data2)
 
+print(res.head(10))
+print(res.tail(10))
+
 # Save res if you want
 # res.write_csv('Results.csv')
 
